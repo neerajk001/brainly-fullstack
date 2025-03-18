@@ -3,10 +3,15 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import { UserModel, contentModel, linkModel } from './db';
 import { jwt_password } from "./config";
-const app = Express();
-app.use(Express.json());
 import { userMiddleware } from "./middleWare";
 import  { random } from './utils'
+import cors from 'cors';
+
+
+const app = Express();
+app.use(Express.json());
+app.use(cors())
+
 
 
 app.post('/api/v1/signup' ,async  (req ,res)  =>{
@@ -17,6 +22,7 @@ app.post('/api/v1/signup' ,async  (req ,res)  =>{
         username:username,
         password:password,
     })
+      
 
     res.json({
         message:'you  signed up'
@@ -82,12 +88,12 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
 
 )
 
-app.delete("/api/v1/content",userMiddleware,async(req ,res) =>{
-    const contentId =req.body.contentId;
+app.delete("/api/v1/content/:id",userMiddleware,async(req ,res) =>{
+    const contentId =req.params.id;
     //@ts-ignore
     const userId =req.userId;
-    await contentModel.deleteMany({
-        contentId,
+    await contentModel.findOneAndDelete({
+       _id: contentId,
         userId
     })
     res.json({
