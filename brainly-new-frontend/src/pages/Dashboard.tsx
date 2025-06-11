@@ -1,63 +1,64 @@
-import React, { useState } from 'react';
-import DashboardNavbar from '../components/DashboardNavbar';
-import Sidebar from '../components/Sidebar';
-import { PanelRight, DoorOpen } from 'lucide-react';
-import Card from '../components/Card';
-import CreateModal from '../components/CreateModal';
-import UseContent from '../hooks/UseContent';
+import React, { useState } from "react";
+import { Brain, Youtube, Instagram, Twitter, File, LogOut, Image } from "lucide-react";
 
-interface content {
-  _id: string;
-  type:any; // Ensure type exists
-  title: string;
-  link:string,
-  
+interface SidebarProps {
+  setFilter: (value: string) => void;
 }
-const Dashboard = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false); 
-   const [contents,refresh,deleteContent] =UseContent()
-   const [filter, setFilter] =useState<string|undefined>()
-  const [isOpen, setIsOpen] = useState(true);
-  const toggleBar = () => {
-    setIsOpen(!isOpen);
-  };
 
+const Sidebar: React.FC<SidebarProps> = ({ setFilter }) => {
+  const [activeFilter, setActiveFilter] = useState("");
 
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/signin";
+  }
 
-    // filter the content based on the filtered category 
-    const filteredContent =filter ? contents.filter(item =>item.type ===filter):contents
+  const sidebarItems = [
+    { name: "All", type: "" },
+    { name: "YouTube", type: "youtube", icon: <Youtube className="text-white" />, bg: "bg-red-600" },
+    { name: "Instagram", type: "instagram", icon: <Instagram className="text-white" />, bg: "bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600" },
+    { name: "Twitter", type: "twitter", icon: <Twitter className="text-white" />, bg: "bg-blue-500" },
+    { name: "Images", type: "images", icon: <Image className="text-white" />, bg: "bg-blue-800" },
+    { name: "Document", type: "documents", icon: <File className="text-white" />, bg: "bg-yellow-500" },
+  ];
+
   return (
-    <>
-      <div className="relative flex fixed">
-        {/* ✅ Pass modal state correctly */}
-        <CreateModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />  
+    <div className="h-screen w-72 fixed left-0 top-0 bg-black text-white border-r shadow-lg">
+      <div className="ml-8 mt-8 flex gap-1 items-center">
+        <Brain size={36} />
+        <span className="font-bold text-2xl">
+          Recall <span className="text-black bg-amber-500 px-1 rounded">hub</span>
+        </span>
+      </div>
 
-        <button onClick={toggleBar} className="absolute top-2 left-2 z-50 text-white p-0.5 rounded-md hover:border hover:cursor-pointer fixed">
-          {isOpen ? <DoorOpen /> : <PanelRight />}
-        </button>
-
-        <div className={`duration-300 ease-in-out transition-all ${isOpen ? 'block' : "hidden"}`}>
-          <Sidebar setFilter={setFilter}/>
-        </div>
-
-        <div className={`flex-grow transition-all duration-300 ease-in-out ${isOpen ? 'ml-[300px]' : 'ml-0'}`}>
-          {/* ✅ Pass `setIsOpenModal` to DashboardNavbar */}
-          <DashboardNavbar setIsOpenModal={setIsOpenModal} />  
-          
-          <div className="flex flex-wrap space-x-3 space-y-2 shadow-lg ml-8">
-            {filteredContent.map(({_id,link,type,title}:content)=>  <Card key={_id}
-             title={title}
-              link={link} 
-              type={type}
-              onDelete={()=>deleteContent(_id)}
-             />)}
-          
-            
+      <div className="mt-10 p-2 space-y-2">
+        {sidebarItems.map(({ name, type, icon, bg }) => (
+          <div
+            key={name}
+            onClick={() => {
+              setFilter(type);
+              setActiveFilter(type);
+            }}
+            className={`ml-8 py-2 px-4 w-5/6 rounded-lg cursor-pointer flex gap-3 font-semibold transition hover:scale-105
+              ${activeFilter === type ? `${bg} text-white` : 'hover:bg-gray-600'}
+            `}
+          >
+            {icon && <div className={`p-2 rounded ${bg}`}>{icon}</div>}
+            {name}
           </div>
+        ))}
+
+        <div className="flex justify-center mt-4">
+          <button
+            onClick={logout}
+            className="bg-red-600 w-full p-2 rounded-lg font-bold text-lg flex items-center justify-center gap-2"
+          >
+            <LogOut size={20} /> Logout
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Dashboard;
+export default Sidebar;

@@ -5,7 +5,7 @@ import { Moon } from 'lucide-react';
 import { Menu } from 'lucide-react';
 import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const navigate =useNavigate()
@@ -48,17 +48,21 @@ const Navbar = () => {
       </div>
 
       <div className='md:hidden flex space-x-4'>
+        
       <Button variant='outline'><Moon/></Button>
       <Button variant='outline'onClick={toggleTheme}>{isOpen ? <X/>: <Menu/>}</Button>
 
       </div>
 
       {isOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white dark:bg-[#121212] flex flex-col items-center space-y-4 py-4 shadow-md ">
-          <a href="#" className="text-black dark:text-white hover:text-blue-500">Home</a>
-          <a href="#" className="text-black dark:text-white hover:text-blue-500">About</a>
-          <a href="#" className="text-black dark:text-white hover:text-blue-500">Services</a>
-          <a href="#" className="text-black dark:text-white hover:text-blue-500">Contact</a>
+        <div className=" top-16 left-0 w-full bg-white dark:bg-[#121212] flex flex-col items-center space-y-4 py-4 shadow-md z-50 absolute ">
+         <div className='flex flex-col space-y-4 py-4 px-20 border-2 rounded-md items-center'>
+         <Link to='/signin' className='font-semibold bg-gray-400 hover:bg-blue-500 p-1 rounded-md text-blue-800 hover:text-white px-6.5'>login</Link>
+          <Link to='/signup' className='font-semibold bg-gray-400 hover:bg-blue-500 p-1 rounded-md text-blue-800 hover:text-white px-4'>Register</Link>
+          <Link to='/dashboard' className='font-semibold bg-gray-400 hover:bg-blue-500 p-1 rounded-md text-blue-800 hover:text-white px-2'>dashboard</Link>
+         </div>
+
+          
         </div>
       )}
 

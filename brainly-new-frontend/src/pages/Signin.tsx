@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef,useEffect } from 'react'
 import {motion} from 'framer-motion'
 import Input from '../components/Input'
 import Button from '../components/Button'
@@ -25,6 +25,20 @@ const Signin = () => {
     navigate('/dashboard')
     alert('you have signed in')
   }
+  
+  useEffect(()=>{
+      const savedusername =localStorage.getItem('username');
+      const savedpassword =localStorage.getItem('password')
+  
+      if(usernameRef.current){
+        usernameRef.current.value =savedusername || "";
+        
+      }
+  
+      if(passwordRef.current){
+        passwordRef.current.value =savedpassword || "";  
+      }
+    },[])
 
 
 

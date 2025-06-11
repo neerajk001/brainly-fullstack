@@ -4,7 +4,12 @@ import { X } from 'lucide-react';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
 
-function CreateModal({ isOpenModal, setIsOpenModal }) {
+interface CreateModalProps {
+  isOpenModal: boolean;
+  setIsOpenModal: (value: boolean) => void;
+} 
+
+function CreateModal({ isOpenModal, setIsOpenModal }:CreateModalProps) {
     const [link ,setLink] = useState("")
     const [title,setTitle] =useState("")
     const [type,setType] =useState("youtube")

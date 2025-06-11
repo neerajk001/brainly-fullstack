@@ -10,24 +10,24 @@ const Home = () => {
   const getAnotherPage =()=>{
     navigate("/signup")
   }
-  const textPart1 = "A smarter way to remember"; // First part of the text
-  const textPart2 = "your digital brain always online"; // Second part of the text
-  const typingSpeed = 0.1; // Speed of typing effect
+  const textPart1 = "A smarter way to remember"; 
+  const textPart2 = "your digital brain always online"; 
+  const typingSpeed = 0.1; 
 
-  // Animation variants for the typing effect
+  
   const typingVariantsPart1 = {
     initial: { width: 0, opacity: 1 },
     animate: { 
       width: "100%", 
       transition: {
-        duration: textPart1.length * typingSpeed, // Duration for the first part
-        ease: [0.42, 0, 0.58, 1], // Proper CSS ease-in-out cubic-bezier
+        duration: textPart1.length * typingSpeed, 
+        ease: [0.42, 0, 0.58, 1], 
       }
     },
   };
 
   const buttonVariants = {
-    initial: { scale: 1, opacity: 0 }, // Initial state
+    initial: { scale: 1, opacity: 0 },
     animate: { 
       scale: 1, 
       opacity: 1, 
@@ -60,36 +60,36 @@ const Home = () => {
     },
   };
 
-  // Floating animation for brain icons
+  
   const floatingVariants = {
     float: {
-      y: [-10, 10], // Move up and down
-      rotate: [-5, 5], // Slight rotation
+      y: [-10, 10], 
+      rotate: [-5, 5], 
       transition: {
-        duration: 3, // Duration of one full cycle
-        repeat: Infinity, // Loop infinitely
-        repeatType: "reverse", // Reverse the animation
-        ease: "easeInOut", // Smooth easing
+        duration: 3, 
+        repeat: Infinity, 
+        repeatType: "reverse", 
+        ease: "easeInOut", 
       },
     },
   };
 
-  // Generate random positions for brain icons
+  
   const generateRandomPosition = () => {
     return {
-      top: `${Math.random() * 100}vh`, // Random top position
-      left: `${Math.random() * 100}vw`, // Random left position
+      top: `${Math.random() * 100}vh`, 
+      left: `${Math.random() * 100}vw`, 
     };
   };
 
-  // Create an array of brain icons with random positions
+  
   const brainIcons = Array.from({ length: 20 }).map((_, index) => {
     const position = generateRandomPosition();
     return (
       <motion.div
         key={index}
         className="absolute text-4xl opacity-30"
-        style={{ ...position, color: '#3b82f6' }} // Blue color for brain icons
+        style={{ ...position, color: '#3b82f6' }}
         variants={floatingVariants}
         animate="float"
       >
@@ -118,20 +118,20 @@ const Home = () => {
             initial="initial"
             animate="animate"
             variants={typingVariantsPart1}
-            style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} // Prevent line breaks during typing effect
+            style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} 
           >
             {textPart1}
           </motion.div>
         </div>
 
-        {/* Second Part with Continuous Typing Effect */}
+        
         <div className="text-white flex justify-center items-center font-mono text-2xl md:text-4xl text-center">
           <motion.div
             className="hover:animate-shake hover:text-white hover:drop-shadow-[0_0_8px_white]"
             initial="initial"
             animate="animate"
             variants={typingVariantsPart2}
-            style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} // Prevent line breaks during typing effect
+            style={{ whiteSpace: 'nowrap', overflow: 'hidden' }} 
           >
             {textPart2}
           </motion.div>

@@ -2,18 +2,29 @@ import React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
-import { Plus } from 'lucide-react';
+import { Divide, Menu, Plus, X } from 'lucide-react';
 import { Share2 } from 'lucide-react';
 import { Brain } from 'lucide-react';
 
-const DashboardNavbar = ({setIsOpenModal}) => {
+interface Props{
+  setIsOpenModal: (value: boolean) => void;
+} 
+
+
+const DashboardNavbar = ({setIsOpenModal}:Props) => {
+  const [isOpen ,setIsOpen] =useState(false)
+
+  const contenBar = () =>{
+    setIsOpen(!isOpen)
+  }
+
  
   return (
     <div className='w-full flex justify-end text-white p-2 px-12  '>
       {/* <motion.div>
       <Brain size={36} color="white" strokeWidth={2} />
       </motion.div> */}
-      <motion.div className='space-x-6 flex hidden md:flex'
+      <motion.div className='space-x-6 flex  md:flex'
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -41,6 +52,18 @@ const DashboardNavbar = ({setIsOpenModal}) => {
           </Button>
         </motion.div>
       </motion.div>
+      
+      <Button variant='outline'className='' onClick={contenBar}>{isOpen ? <X/>: <Menu/>}</Button>
+   
+      {isOpen && <div className=' top-16 left-0 flex flex-col absolute w-full md:hidden  '>
+        <div className='  items-center text-center md:hidden flex flex-col space-y-4 border'>
+                  <Button variant='primary'onClick={()=>setIsOpenModal(true)} startIcons={<Plus/>}>add content</Button>
+                  <Button variant='primary' startIcons={<Share2/>}>share content</Button>
+
+        </div>
+        </div>}
+      
+      
     </div>
   );
 };

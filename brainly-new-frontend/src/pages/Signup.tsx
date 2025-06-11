@@ -1,17 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import {motion} from 'framer-motion'
 import Input from '../components/Input'
 import Button from '../components/Button'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { BACKEND_URL } from '../config'
+import toast from 'react-hot-toast'
 
 
 const Signup = () => {
   const usernameRef =useRef<HTMLInputElement>(null);
   const passwordRef =useRef<HTMLInputElement>(null)
-
-
   const navigate =useNavigate()
   
 
@@ -22,10 +21,32 @@ const Signup = () => {
     await axios.post (BACKEND_URL+'/api/v1/signup',{
        username,
        password
-    })
+    },
+  )
+  console.log(username,password)
+   localStorage.setItem('username',username || "");
+  localStorage.setItem('password',password || ""); 
+    console.log("hii  signup")
+    toast.success("You have signed up successfully!")
     navigate('/signin')
-    alert("you have signed up")
+  
+    // alert("you have signed up")
   }
+
+  useEffect(()=>{
+    const savedusername =localStorage.getItem('username');
+    const savedpassword =localStorage.getItem('password')
+
+    if(usernameRef.current){
+      usernameRef.current.value =savedusername || "";
+      
+    }
+
+    if(passwordRef.current){
+      passwordRef.current.value =savedpassword || "";  
+    }
+  },[])
+  
   return (
   <div className='flex justify-center items-center h-screen bg-transparent'>
    <motion.div className=' text-white w-96 items-center text-center p-8 rounded-md shadow-lg border-transparent  overflow-hidden border-2 bg-black hover:scale-110 transition-all '

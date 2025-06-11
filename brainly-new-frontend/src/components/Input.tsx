@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 interface InputProps {
   placeholder: string;
+  
   reference?:any
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

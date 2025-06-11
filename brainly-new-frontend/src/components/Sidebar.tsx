@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Brain, Youtube, Instagram, Twitter, Facebook, File, LogOut } from "lucide-react";
 import { Image } from 'lucide-react';
-const Sidebar = ({ setFilter }) => {
+
+interface SidebarProps {
+  setFilter: (type: string) => void;
+}
+const Sidebar = ({ setFilter}:SidebarProps) => {
   const[activeFilter ,setActiveFilter] =useState('')
   function logout() {
     localStorage.removeItem("token");

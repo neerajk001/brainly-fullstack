@@ -35,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
       className={`${baseStyles} ${variants[variant]} ${className} relative group`}
       disabled={disabled}
     >
-      {/* Glow Effect on Hover */}
+      
       <span
         aria-hidden
         className="absolute inset-0 z-0 scale-x-[2.0] blur-md 
@@ -44,7 +44,7 @@ const Button: React.FC<ButtonProps> = ({
         before:from-blue-500 before:via-green-400 before:to-purple-500 opacity-50"
       />
 
-      {/* Hover Glow Effect */}
+      
       <span
   className="absolute inset-0 rounded-lg border-2 border-transparent 
   transition-all duration-300 group-hover:border-white 
@@ -52,7 +52,7 @@ const Button: React.FC<ButtonProps> = ({
   group-hover:bg-opacity-10"
 />
 
-      {/* Button Content */}
+      
       <span className="relative z-10 flex items-center gap-2">
         {startIcons && <span>{startIcons}</span>}
         {children}
