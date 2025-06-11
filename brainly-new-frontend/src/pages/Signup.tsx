@@ -79,7 +79,7 @@ const Signup = () => {
       animate={{opacity:1,x:0}}
       transition={{duration:0.5, delay:0.2}}
       >
-        <Input reference={usernameRef}
+        <Input ref={usernameRef}
         placeholder='enter your username'/>
 
       </motion.div>
@@ -88,7 +88,7 @@ const Signup = () => {
       animate={{opacity:1,x:0,}}
       transition={{duration:0.5, delay:0.3}}
       >
-        <Input reference={passwordRef}
+        <Input ref={passwordRef}
         placeholder='enter your password'/>
 
       </motion.div>

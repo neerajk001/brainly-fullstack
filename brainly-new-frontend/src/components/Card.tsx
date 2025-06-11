@@ -5,7 +5,7 @@ interface CardProps {
   link: string;
   title: string;
   type: "twitter" | "youtube" | "images" | "documents" | "instagram";
-  onDelete:any
+  onDelete:(()=>void)
 }
 declare global {
   interface Window {

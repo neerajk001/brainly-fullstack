@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from './Input';
+
 import { X } from 'lucide-react';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';

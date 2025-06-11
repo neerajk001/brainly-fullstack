@@ -2,9 +2,9 @@ import React from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Button from './Button';
-import { Divide, Menu, Plus, X } from 'lucide-react';
+import {  Menu, Plus, X } from 'lucide-react';
 import { Share2 } from 'lucide-react';
-import { Brain } from 'lucide-react';
+
 
 interface Props{
   setIsOpenModal: (value: boolean) => void;
